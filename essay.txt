@@ -1,0 +1,21 @@
+1- What is the Node.js Event Loop?
+-- عبارة عن loop شغالة طول ما البرنامج شغال
+تشوف فيه مهام جاهزة تتنفذ تنفذها بالترتيب.
+
+2- What is Libuv and What Role Does It Play in Node.js?
+-- هي مكتبه لل c++ بتخلي ال js تتعامل كأنها multi thread بتاخد الحاجه ال js مش بتعرف تعملها و تنفذها ب c++ 
+
+3- How Does Node.js Handle Asynchronous Operations Under the Hood?
+-- بيستخدم ال event loop عشان يتعامل مع ال async Operations و بيتعامل مع العملبات التقيله باستخدام libuv و بيرحعها في callback
+
+4- What is the Difference Between the Call Stack, Event Queue, and Event Loop in Node.js?
+-- call stack ده المكان اللي Node.js بينفذ فيه الكود الـ synchronous.
+event Queue ده بيتحط فيه callbacks الجاهزة للتنفيذ بعد ما العمليات الـ async تخلص
+event loop بيلف علي العمليات الشغاله و يرجع ال خلص 
+
+5- What is the Node.js Thread Pool and How to Set the Thread Pool Size?
+--  Thread Pool في Node.js هو مجموعة Threads بتوفرها مكتبة libuv علشان تنفذ العمليات الثقيلة اللي ما ينفعش تتعمل Non-blocking على الـ OS.
+
+6- How Does Node.js Handle Blocking and Non-Blocking Code Execution?
+-- Blocking code بيتنفّذ على الـ main thread وبيوقف الـ Event Loop
+Non-blocking code بيتنفّذ خارج الـ main thread عن طريق OS أو libuv ويرجع نتيجته لما يخلص

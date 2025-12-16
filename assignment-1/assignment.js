@@ -12,13 +12,13 @@ console.log(convertNum + 7);
  * @returns Invalid
  */
 function checkFalsy(val) {
-  if (val == false) {
+  if (!val) {
     return "Invalid";
   } else {
     return val;
   }
 }
-console.log(checkFalsy(0));
+console.log(checkFalsy(""));
 
 /**
  * 3- use for loop to print all numbers between 1, 10 and skipping even numbers
@@ -119,11 +119,10 @@ console.log(squareNumber(5));
  * 10- write a function that destructure an object to extract values
  * @returns formatted String
  */
-function formattedString() {
-  const person = { name: "john", age: 25 };
-  console.log(`${person.name} is ${person.age} years old`);
+function formattedString({ name, age }) {
+  console.log(`${name} is ${age} years old`);
 }
-formattedString();
+formattedString({ name: "mohamed", age: 21 });
 
 /**
  * 11- write function that accepts multiple parameters
@@ -144,9 +143,13 @@ console.log(sumNumbers(1, 2, 3, 4, 5));
  */
 // 1- way one
 function promise() {
-  setTimeout(() => console.log("Success from function"), 3000);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Success");
+    }, 3000);
+  });
 }
-promise();
+promise().then((result) => console.log(result));
 
 /**
  * 13- write function to find the largest number in array
