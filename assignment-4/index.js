@@ -81,21 +81,29 @@ app.patch(`${PATH}/:id`, async (req, res) => {
  * Create an API that deletes a User by ID. The user id should be retrieved from either the request body or optional params. (1
  * @param id
  */
-app.delete(`${PATH}/:id`, async (req, res) => {
-  const { id } = req.params;
+app.delete(`${PATH}{/:paramId}`, async (req, res) => {
+  const { paramId } = req.params;
+  const { bodyId } = req.body;
 
   const data = await readData();
+
+  const id = paramId || bodyId;
+
+  if (!id) {
+    return res.status(400).json({ msg: "id is required in params or body" });
+  }
 
   const findIndex = data.findIndex((u) => u.id == id);
   if (findIndex == -1) {
     return res.status(404).json({ msg: "User Not Found" });
   }
-  const deletedUser = data.splice(findIndex, 1);
+
+  const deletedUser = data.splice(findIndex, 1)[0];
   await writeData(data);
 
   return res
-    .status(202)
-    .json({ msg: "User Updated Successfully", user: deletedUser });
+    .status(200)
+    .json({ msg: "User Deleted Successfully", user: deletedUser });
 });
 
 /**
